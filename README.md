@@ -19,9 +19,9 @@ Di dalam aplikasi ini pengguna bisa melihat daftar menu, melihat detail makanan,
    - Tombol untuk mengirim pesanan ke kasir.
 
 ## Cara Menjalankan Aplikasi
-Pastikan Flutter sudah terinstall
-Jalankan perintah:
+1. Pastikan Flutter sudah terinstall
+2. Jalankan perintah:
    flutter pub get
-   flutter run
-   
-Pastikan folder assets/images sudah ada dan sudah di-register di pubspec.yaml.
+3. Lalu:
+   flutter run   
+4. Pastikan folder assets/images sudah ada dan sudah di-register di pubspec.yaml.
