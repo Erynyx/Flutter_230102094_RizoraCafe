@@ -32,7 +32,7 @@ class _DetailPageState extends State<DetailPage> {
 
       body: Center(
         child: SizedBox(
-          width: 600, // BATAS MAKS BIAR TIDAK MELEBAR DI PC/LAPTOP
+          width: 600, // Batas MAKS biar tidak strech saat di laptop/pc
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -87,9 +87,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  // ====================================================
-  // 🔹 BAGIAN GAMBAR ATAS
-  // ====================================================
+  //  BAGIAN GAMBAR ATAS
   Widget _buildHeaderImage() {
     return Stack(
       children: [
@@ -99,7 +97,7 @@ class _DetailPageState extends State<DetailPage> {
             bottomRight: Radius.circular(20),
           ),
           child: AspectRatio(
-            aspectRatio: 3 / 2, // RESPONSIF & TIDAK OVERFLOW
+            aspectRatio: 3 / 2, // Responsif & Tidak Overflow
             child: Image.asset(
               widget.menu.image,
               fit: BoxFit.cover,
@@ -151,9 +149,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  // ====================================================
-  // 🔹 PILIH JUMLAH
-  // ====================================================
+  //  PILIH JUMLAH
   Widget _buildQuantitySelector() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -200,9 +196,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  // ====================================================
-  // 🔹 BUTTON TAMBAH / KURANG
-  // ====================================================
+  // BUTTON TAMBAH / KURANG
   Widget _quantityButton({
     required IconData icon,
     required VoidCallback onTap,
@@ -218,9 +212,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  // ====================================================
-  // 🔹 TOMBOL PESAN
-  // ====================================================
+  // TOMBOL PESAN
   Widget _buildOrderButton(BuildContext context) {
     return Container(
       width: double.infinity,

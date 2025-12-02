@@ -32,7 +32,7 @@ class _CartPageState extends State<CartPage> {
         ],
       ),
 
-      body: Center(   // 🔹 RESPONSIVE WRAPPER
+      body: Center(   // RESPONSIVE WRAPPER
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 500),
           child: cart.items.isEmpty
@@ -68,7 +68,7 @@ class _CartPageState extends State<CartPage> {
                                 "Harga per item: Rp ${item.menu.price.toStringAsFixed(0)}",
                               ),
 
-                              // 🔹 TOMBOL + - UNTUK QUANTITY
+                              // TOMBOL + - UNTUK QUANTITY
                               trailing: SizedBox(
                                 width: 120,
                                 child: Row(
@@ -113,7 +113,7 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  // 🔹 BAGIAN CHECKOUT DIBAWAH
+  // BAGIAN CHECKOUT DIBAWAH
   Widget _buildCheckoutSection(CartController cart) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -195,7 +195,7 @@ class _CartPageState extends State<CartPage> {
     );
   }
 
-  // 🔹 LOGIC CHECKOUT
+  // LOGIC CHECKOUT
   void _checkout(CartController cart) {
     // Validasi
     if (nameController.text.isEmpty) {

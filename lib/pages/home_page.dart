@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
 
       body: Center(
         child: SizedBox(
-          width: 600, // FIX: max width biar tidak melebar di laptop
+          width: 600, // max width biar tidak melebar di laptop
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // FIX: selalu 2 kolom → tidak melebar
+                      crossAxisCount: 2, // selalu 2 kolom → tidak melebar
                       crossAxisSpacing: 16,
                       mainAxisSpacing: 16,
                       childAspectRatio: 0.75, // fix layout card
@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // selalu 2 kolom → aman
+                      crossAxisCount: 2, // selalu 2 kolom
                       crossAxisSpacing: 16,
                       mainAxisSpacing: 16,
                       childAspectRatio: 0.75,
@@ -89,9 +89,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // ===========================
-  // 🔹 Card Menu NEW FIXED VERSION
-  // ===========================
+  // Card Menu 
   Widget _buildMenuCard(BuildContext context, MenuItem item) {
     return InkWell(
       borderRadius: BorderRadius.circular(14),
@@ -122,7 +120,7 @@ class HomePage extends StatelessWidget {
               borderRadius:
                   const BorderRadius.vertical(top: Radius.circular(14)),
               child: AspectRatio(
-                aspectRatio: 3 / 2, // FIX: gambar selalu ideal dan tidak overflow
+                aspectRatio: 3 / 2, // gambar selalu ideal dan tidak overflow
                 child: Image.asset(
                   item.image,
                   fit: BoxFit.cover,
