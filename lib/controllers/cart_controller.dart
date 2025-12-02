@@ -5,43 +5,47 @@ class CartItem {
   final MenuItem menu;
   int quantity;
 
-  CartItem({
-    required this.menu,
-    required this.quantity,
-  });
+  CartItem({required this.menu, this.quantity = 1});
 
   double get totalPrice => menu.price * quantity;
 }
 
 class CartController extends ChangeNotifier {
-  final List<CartItem> items = [];
+  final List<CartItem> _items = [];
 
-  // Tambah ke keranjang (support quantity langsung)
+  List<CartItem> get items => _items;
+
+  double get totalPrice {
+    return _items.fold(0, (sum, item) => sum + item.totalPrice);
+  }
+
   void addToCart(MenuItem menu, int qty) {
-    final index = items.indexWhere((item) => item.menu.name == menu.name);
+    final existing = _items.where((e) => e.menu == menu).toList();
 
-    if (index != -1) {
-      items[index].quantity += qty;
+    if (existing.isNotEmpty) {
+      existing.first.quantity += qty;
     } else {
-      items.add(CartItem(menu: menu, quantity: qty));
+      _items.add(CartItem(menu: menu, quantity: qty));
     }
-
     notifyListeners();
   }
 
-  // Hapus item
-  void removeFromCart(CartItem item) {
-    items.remove(item);
+  void increaseQuantity(CartItem item) {
+    item.quantity++;
     notifyListeners();
   }
 
-  // Total harga semua item
-  double get totalPrice =>
-      items.fold(0, (total, item) => total + item.totalPrice);
+  void decreaseQuantity(CartItem item) {
+    if (item.quantity > 1) {
+      item.quantity--;
+    } else {
+      _items.remove(item);
+    }
+    notifyListeners();
+  }
 
-  // Clear cart
   void clearCart() {
-    items.clear();
+    _items.clear();
     notifyListeners();
   }
 }

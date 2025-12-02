@@ -9,7 +9,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Pisahkan kategori menu
     final List<MenuItem> foodMenu =
         menuData.where((item) => item.isDrink == false).toList();
 
@@ -18,7 +17,6 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-
       appBar: AppBar(
         title: const Text(
           "Rizora Cafe's",
@@ -29,70 +27,71 @@ class HomePage extends StatelessWidget {
         elevation: 0,
       ),
 
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      body: Center(
+        child: SizedBox(
+          width: 600, // FIX: max width biar tidak melebar di laptop
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SectionTitle(title: "Makanan"),
 
-            // KATEGORI MAKANAN
-            const SectionTitle(title: "Makanan"),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.builder(
-                itemCount: foodMenu.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.82,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: GridView.builder(
+                    itemCount: foodMenu.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // FIX: selalu 2 kolom → tidak melebar
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 0.75, // fix layout card
+                    ),
+                    itemBuilder: (context, index) {
+                      final item = foodMenu[index];
+                      return _buildMenuCard(context, item);
+                    },
+                  ),
                 ),
 
-                itemBuilder: (context, index) {
-                  final MenuItem item = foodMenu[index];
+                const SizedBox(height: 20),
 
-                  return _buildMenuCard(context, item);
-                },
-              ),
-            ),
+                const SectionTitle(title: "Minuman"),
 
-            const SizedBox(height: 20),
-
-            //  KATEGORI MINUMAN
-            const SectionTitle(title: "Minuman"),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.builder(
-                itemCount: drinkMenu.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.82,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: GridView.builder(
+                    itemCount: drinkMenu.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // selalu 2 kolom → aman
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 0.75,
+                    ),
+                    itemBuilder: (context, index) {
+                      final item = drinkMenu[index];
+                      return _buildMenuCard(context, item);
+                    },
+                  ),
                 ),
 
-                itemBuilder: (context, index) {
-                  final MenuItem item = drinkMenu[index];
-                  return _buildMenuCard(context, item);
-                },
-              ),
+                const SizedBox(height: 20),
+              ],
             ),
-
-            const SizedBox(height: 20),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  // Card Menu reusable
+  // ===========================
+  // 🔹 Card Menu NEW FIXED VERSION
+  // ===========================
   Widget _buildMenuCard(BuildContext context, MenuItem item) {
     return InkWell(
       borderRadius: BorderRadius.circular(14),
@@ -104,32 +103,30 @@ class HomePage extends StatelessWidget {
           ),
         );
       },
-
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
+              color: Colors.black.withOpacity(0.1),
               blurRadius: 8,
               offset: const Offset(2, 3),
             ),
           ],
         ),
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(14),
-              ),
-              child: Image.asset(
-                item.image,
-                height: 180,
-                width: double.infinity,
-                fit: BoxFit.cover,
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(14)),
+              child: AspectRatio(
+                aspectRatio: 3 / 2, // FIX: gambar selalu ideal dan tidak overflow
+                child: Image.asset(
+                  item.image,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
 
@@ -157,7 +154,6 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(height: 8),
           ],
         ),
